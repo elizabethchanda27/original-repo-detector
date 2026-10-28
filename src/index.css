@@ -40,7 +40,7 @@ a { color: var(--accent-deep); }
   padding: 40px 0 72px;
 }
 
-.mast { max-width: 680px; }
+.mast { max-width: 720px; }
 
 .wordmark {
   margin: 0 0 10px;
@@ -64,13 +64,24 @@ h1 {
   color: var(--ink);
 }
 
-.lede, .idle-note {
+.lede {
   margin: 14px 0 0;
-  max-width: 62ch;
+  max-width: 68ch;
   color: var(--muted);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   line-height: 1.55;
 }
+
+.lede p { margin: 0; }
+
+.lede ul {
+  margin: 12px 0 0;
+  padding-left: 1.15rem;
+}
+
+.lede li { margin: 0 0 6px; }
+
+.lede strong { color: var(--ink); font-weight: 600; }
 
 .finder {
   margin-top: 28px;

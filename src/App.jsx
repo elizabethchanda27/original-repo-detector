@@ -58,9 +58,17 @@ export default function App() {
       <header className="mast">
         <p className="wordmark">Original Repo Detector</p>
         <h1>Where does this repository sit?</h1>
-        <p className="lede">
-          Paste a GitHub link. The check reads GitHub's fork and template fields.
-        </p>
+        <div className="lede">
+          <p>
+            Paste <strong>owner/name</strong> or a github.com link, then press Check. This looks at GitHub’s public record and tells you whether that repository is the original, a fork, or a copy made from a template.
+          </p>
+          <ul>
+            <li><strong>Original.</strong> GitHub does not record an earlier repository.</li>
+            <li><strong>Fork.</strong> GitHub records the parent this was forked from.</li>
+            <li><strong>Generated from a template.</strong> GitHub records the template it was made from.</li>
+            <li><strong>Not found.</strong> That name is missing, private, or renamed.</li>
+          </ul>
+        </div>
       </header>
 
       <form className="finder" onSubmit={onSubmit}>
@@ -95,13 +103,7 @@ export default function App() {
         {status === "loading" ? <p className="progress">{progress}</p> : null}
       </form>
 
-      {report ? (
-        <ReportView report={report} />
-      ) : (
-        <p className="idle-note">
-          A result lists the relationships it could read, the activity behind them, and the facts taken from the GitHub record.
-        </p>
-      )}
+      {report ? <ReportView report={report} /> : null}
     </div>
   );
 }
