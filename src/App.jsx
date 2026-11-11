@@ -2,6 +2,7 @@ import { useState } from "react";
 import { investigate } from "./api/github.js";
 import { parseRepoInput } from "./lib/parseInput.js";
 import { ReportView } from "./components/Report.jsx";
+import { Findings } from "./components/Findings.jsx";
 
 export default function App() {
   const [input, setInput] = useState("");
@@ -16,6 +17,7 @@ export default function App() {
   const [progress, setProgress] = useState("");
   const [error, setError] = useState("");
   const [report, setReport] = useState(null);
+  const [view, setView] = useState("tool");
 
   async function run(fullName) {
     setStatus("loading");
@@ -55,6 +57,31 @@ export default function App() {
 
   return (
     <div className="page">
+      <nav className="nav" aria-label="Sections">
+        <div className="nav-links">
+          <button type="button" aria-current={view === "tool" ? "page" : undefined} onClick={() => setView("tool")}>
+            Detector
+          </button>
+          <button type="button" aria-current={view === "findings" ? "page" : undefined} onClick={() => setView("findings")}>
+            Team findings
+          </button>
+        </div>
+        <div className="team-mark" aria-label="Microsoft 3B team" title="Microsoft 3B">
+          <span className="die">
+            <span className="die-face die-front"><span>M</span>3B</span>
+            <span className="die-face die-back" aria-hidden="true" />
+            <span className="die-face die-right" aria-hidden="true"><i /><i /><i /></span>
+            <span className="die-face die-left" aria-hidden="true" />
+            <span className="die-face die-top" aria-hidden="true" />
+            <span className="die-face die-bottom" aria-hidden="true" />
+          </span>
+        </div>
+      </nav>
+
+      {view === "findings" ? (
+        <Findings />
+      ) : (
+      <>
       <header className="mast">
         <p className="wordmark">Original Repo Detector</p>
         <h1>Where does this repository sit?</h1>
@@ -104,6 +131,8 @@ export default function App() {
       </form>
 
       {report ? <ReportView report={report} /> : null}
+      </>
+      )}
     </div>
   );
 }
